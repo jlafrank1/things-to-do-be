@@ -17,7 +17,9 @@ router.get("/", async (req, res) => {
 // -- show --
 router.get("/:id", async (req, res) => {
   try {
-    const oneFavorite = await Favorites.findById(req.params.id);
+    const oneFavorite = await Favorites.findById(req.params.id)
+      .populate("creator")
+      .exec();
     res.status(200).json(oneFavorite);
   } catch {
     res.status(400).json({ error: error.message });
