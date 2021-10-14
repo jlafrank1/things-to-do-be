@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 9000;
 const cors = require("cors");
 
 // controllers
+const authController = require("./controllers/auth");
 const favoritesController = require("./controllers/favorites");
 
 // Cors
@@ -25,6 +26,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.use("/auth", authController);
 app.use("/favorites", favoritesController);
 
 app.listen(PORT, () => {
