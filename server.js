@@ -1,5 +1,6 @@
 // dependencies
 const express = require("express");
+const passport = require("passport");
 const app = express();
 require("./db/db");
 const PORT = process.env.PORT || 9000;
@@ -25,6 +26,8 @@ const corsOptions = {
 // middleware
 app.use(express.json());
 app.use(cors(corsOptions));
+
+app.use(passport.initialize());
 
 app.use("/auth", authController);
 app.use("/favorites", favoritesController);

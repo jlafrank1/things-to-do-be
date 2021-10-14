@@ -12,22 +12,26 @@ const register = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(req.body.password, salt);
+
+    const pwStore = req.body.password;
+
     req.body.password = passwordHash;
-    console.log("req body password > ", req.body.password);
 
     const newUser = await User.create(req.body);
-    const { username, _id } = newUser;
-    // const responseData = { username, _id };
-    console.log("new user > ", newUser);
-
-    res.status(201).json({
-      currentUser: newUser,
-      isLoggedIn: true,
-    });
+    if (newUser) {
+      req.body.password = pwStore;
+      const authenticatedUserToken = createUserToken(req, newUser);
+      res.status(201).json({
+        user: newUser,
+        isLoggedIn: true,
+        token: authenticatedUserToken,
+      });
+    } else {
+      res.status(400).json({ error: "Something went wrong" });
+    }
   } catch (err) {
-    res.status(400).json({ err: err.message });
+    res.status(400).json({ error: err.message });
   }
-  // res.send("post register");
 };
 
 // LOG IN
@@ -50,6 +54,20 @@ const login = async (req, res) => {
 
 // LOG OUT
 // GET /auth/logout
+router.get( "/logout", requireToken, async (req, res, next) => {
+  try {
+    const currentUser = req.user.username
+    delete req.user
+    res.status(200).json({
+      message: `${currentUser} currently logged in`,
+      isLoggedIn: false,
+      token: "",
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 
 // routing
 router.post("/register", register);

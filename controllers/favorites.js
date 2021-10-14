@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Favorites = require("../models/favorites");
+const { handleValidateOwnership, requireToken } = require("../middleware/auth");
 
 // -- index--
 router.get("/", async (req, res) => {
@@ -15,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 // -- show --
-router.get("/:id", async (req, res) => {
+router.get("/:id", requireToken, async (req, res) => {
   try {
     const oneFavorite = await Favorites.findById(req.params.id)
       .populate("creator")
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // -- create --
-router.post("/", async (req, res) => {
+router.post("/", requireToken, async (req, res) => {
   try {
     const newFavorite = await Favorites.create(req.body);
     res.status(200).json(newFavorite);
@@ -37,8 +38,9 @@ router.post("/", async (req, res) => {
 });
 
 // -- destroy --
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", handleValidateId, requireToken, async (req, res) => {
   try {
+    handleValidateOwnership(req, await Favorite.findById(req.params.id));
     const deletedFavorite = await Favorites.findByIdAndRemove(req.params.id);
     res.status(200).json(deletedFavorite);
   } catch (error) {
@@ -47,8 +49,9 @@ router.delete("/:id", async (req, res) => {
 });
 
 // -- update --
-router.put("/:id", async (req, res) => {
+router.put("/:id", requireToken, async (req, res) => {
   try {
+    handleValidateOwnership(req, await Favorite.findById(req.params.id));
     const updatedFavorite = await Favorites.findByIdAndUpdate(
       req.params.id,
       req.body,

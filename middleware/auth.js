@@ -40,7 +40,18 @@ const createUserToken = (req, user) => {
   return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 });
 };
 
+const handleValidateOwnership = (req, document) => {
+  const ownerId = document.creator._id || document.creator;
+  // Check if the current user is also the owner of the document
+  if (!req.user._id.equals(ownerId)) {
+    return new Error("Unauthorized Access");
+  } else {
+    return document;
+  }
+};
+
 module.exports = {
   requireToken,
   createUserToken,
+  handleValidateOwnership,
 };
