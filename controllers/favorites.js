@@ -5,7 +5,9 @@ const Favorites = require("../models/favorites");
 // -- index--
 router.get("/", async (req, res) => {
   try {
-    const allFavorites = await Favorites.find();
+    const allFavorites = await Favorites.find()
+      .populate("creator", "email")
+      .exec();
     res.status(200).json(allFavorites);
   } catch (error) {
     res.status(400).json({ error: error.message });

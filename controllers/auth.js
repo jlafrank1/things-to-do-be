@@ -14,6 +14,8 @@ const register = async (req, res) => {
     console.log("req body password > ", req.body.password);
 
     const newUser = await User.create(req.body);
+    const { username, _id } = newUser;
+    // const responseData = { username, _id };
     console.log("new user > ", newUser);
 
     res.status(201).json({
@@ -23,7 +25,7 @@ const register = async (req, res) => {
   } catch (err) {
     res.status(400).json({ err: err.message });
   }
-  res.send("post register");
+  // res.send("post register");
 };
 
 // LOG IN
