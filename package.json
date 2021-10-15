@@ -21,7 +21,7 @@
   "main": "server.js",
   "engines": {
     "node": "16.8.0"
-  }
+  },
   "devDependencies": {},
   "repository": {
     "type": "git",
