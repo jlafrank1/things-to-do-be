@@ -1,8 +1,7 @@
 const express = require("express");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { createUserToken } = require("../middleware/auth");
-
+const { createUserToken, requireToken } = require("../middleware/auth");
 const router = express.Router();
 
 // controller
@@ -54,10 +53,10 @@ const login = async (req, res) => {
 
 // LOG OUT
 // GET /auth/logout
-router.get( "/logout", requireToken, async (req, res, next) => {
+router.get("/logout", requireToken, async (req, res, next) => {
   try {
-    const currentUser = req.user.username
-    delete req.user
+    const currentUser = req.user.username;
+    delete req.user;
     res.status(200).json({
       message: `${currentUser} currently logged in`,
       isLoggedIn: false,
@@ -66,8 +65,7 @@ router.get( "/logout", requireToken, async (req, res, next) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-};
-
+});
 
 // routing
 router.post("/register", register);
