@@ -4,6 +4,7 @@ const passport = require("passport");
 const app = express();
 require("./db/db");
 const PORT = process.env.PORT || 9000;
+require('dotenv').config()
 const cors = require("cors");
 
 // controllers
@@ -11,7 +12,10 @@ const authController = require("./controllers/auth");
 const favoritesController = require("./controllers/favorites");
 
 // Cors
-const whitelist = ["http://localhost:3000"];
+const whitelist = [
+  "http://localhost:3000",
+  "https://damp-lake-03547.herokuapp.com/"
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
