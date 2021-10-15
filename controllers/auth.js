@@ -57,7 +57,7 @@ const login = async (req, res) => {
 // GET /auth/logout
 router.get("/logout", requireToken, async (req, res, next) => {
   try {
-    const currentUser = req.user.username;
+    const currentUser = req.user.email;
     delete req.user;
     res.status(200).json({
       message: `${currentUser} currently logged in`,

@@ -15,6 +15,7 @@ const favoritesController = require("./controllers/favorites");
 const whitelist = [
   "http://localhost:3000",
   "https://damp-lake-03547.herokuapp.com",
+  "http://calm-falls-13073.herokuapp.com",
   "https://calm-falls-13073.herokuapp.com"
 ];
 
