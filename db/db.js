@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 
+// How to connect to the database
+const MONGODB_URI = process.env.MONGODB_URI
+
+// Connect to Mongo
+mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true })
+
+
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
   console.log(err.message + " is Mongod not running?")
 );
 mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
-// Connection string (we will be replacing this later with environmental variables)
-mongoose.connect("mongodb://localhost:27017/boredfavorites", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
+
 mongoose.connection.once("open", () => {
   console.log("connected to mongoose...");
 });
