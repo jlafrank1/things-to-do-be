@@ -38,8 +38,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   // res.send("post login");
   try {
-    const loggingUser = req.body.username;
-    const foundUser = await User.findOne({ username: loggingUser });
+    const loggingUser = req.body.email;
+    // console.log("backend, login function, req.body.email > ", loggingUser)
+    const foundUser = await User.findOne({ email: loggingUser });
+    // console.log("backend, login function, email > ", foundUser)
     const token = await createUserToken(req, foundUser);
     res.status(200).json({
       user: foundUser,
