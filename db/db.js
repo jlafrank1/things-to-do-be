@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 // How to connect to the database
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/boredfavorites"
+// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/boredfavorites"
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/'+ `boredfavorites`
 
 // Connect to Mongo
 mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true })
