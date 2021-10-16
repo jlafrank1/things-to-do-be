@@ -40,7 +40,7 @@ router.post("/", requireToken, async (req, res) => {
 // -- destroy --
 router.delete("/:id", requireToken, async (req, res) => {
   try {
-    // handleValidateOwnership(req, await Favorite.findById(req.params.id));
+    handleValidateOwnership(req, await Favorite.findById(req.params.id));
     const deletedFavorite = await Favorites.findByIdAndRemove(req.params.id);
     res.status(200).json(deletedFavorite);
   } catch (error) {
