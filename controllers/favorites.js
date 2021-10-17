@@ -40,7 +40,9 @@ router.post("/", requireToken, async (req, res) => {
 // -- destroy --
 router.delete("/:id", requireToken, async (req, res) => {
   try {
-    handleValidateOwnership(req, await Favorite.findById(req.params.id));
+    console.log("hitting destroy")
+    handleValidateOwnership(req, await Favorites.findById(req.params.id));
+    console.log("handleValidateOwnership > ", handleValidateOwnership)
     const deletedFavorite = await Favorites.findByIdAndRemove(req.params.id);
     res.status(200).json(deletedFavorite);
   } catch (error) {
@@ -51,7 +53,7 @@ router.delete("/:id", requireToken, async (req, res) => {
 // -- update --
 router.put("/:id", requireToken, async (req, res) => {
   try {
-    handleValidateOwnership(req, await Favorite.findById(req.params.id));
+    handleValidateOwnership(req, await Favorites.findById(req.params.id));
     const updatedFavorite = await Favorites.findByIdAndUpdate(
       req.params.id,
       req.body,

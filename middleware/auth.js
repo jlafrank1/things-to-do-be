@@ -42,10 +42,6 @@ const createUserToken = (req, user) => {
 
 const handleValidateOwnership = (req, document) => {
   const ownerId = document.creator._id || document.creator;
-  console.log("middleware auth ownerId > ", ownerId)
-  console.log("middleware auth > ", document.creator._id)
-  console.log("middleware auth > ", document.creator)
-  // Check if the current user is also the owner of the document
   if (!req.user._id.equals(ownerId)) {
     return new Error("Unauthorized Access");
   } else {
