@@ -166,5 +166,6 @@ I've collaborated with some amazing people in my cohort, and many people deserve
 - [General Assembly](https://generalassemb.ly/)
 - [The Bored API](https://www.boredapi.com/)
 - [coolers.co](https://coolors.co/)
+- [Canva](https://www.canva.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
