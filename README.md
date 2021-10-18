@@ -1,9 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center" id="top">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="assets/logo.png" alt="Logo" width="150" height="150">
-  </a>
+    <img src="assets/logo.png" alt="Logo">
 
   <h3 align="center">Things To Do: The Boredom Cure</h3>
 
