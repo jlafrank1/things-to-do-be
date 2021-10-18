@@ -138,6 +138,7 @@ The user can view and delete items from their favorites list via a modal.
 - [] Optimize landing page and "Welcome" message for mobile
 - [] Create a "loading" animation to show when fetch call is loading
 - [] Improve UX feedback for when items are added to a Favorites list
+- [] Add UX feedback for incorrect username/password combos
 - [] Incorporate Spotify API to "Play a Random Song"
 - [] Allow users to Email results to a friend
 - [] Allow users to mark items as "done" instead of just deleting them from the list
