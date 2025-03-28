@@ -1,0 +1,43 @@
+apiVersion: v3
+kind: service
+metadata:
+  name: things-to-do-be
+  displayName: Things to Do BE
+  tags:
+    - component:backend
+  links:
+    - name: google
+      type: runbook
+      url: https://www.google.com/
+    - name: google
+      provider: gdoc
+      url: https://www.google.com/
+      type: doc
+    - name: google
+      provider: wiki
+      url: https://www.google.com/
+      type: doc
+    - name: things-to-do-be source code
+      provider: github
+      url: https://github.com/jlafrank1/things-to-do-be
+      type: repo
+  contacts:
+    - name: Jess Email
+      type: email
+      contact: jess.lafrank@datadoghq.com
+    - name: #sandbox-jess-lafrank
+      type: slack
+      contact: https://dd.enterprise.slack.com/archives/C03JBK316CC
+  owner: Beagles
+
+spec:
+  components:
+    - service:things-to-do-fe
+
+datadog:
+  events:
+    - name: "deployment events"
+      query: "service:things-to-do-be AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "service:things-to-do-be AND type:github"
